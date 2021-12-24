@@ -1,0 +1,10 @@
+precision mode: bullet gets faster after it crosses the border to the other side.
+
+last shot: after being defeated, a player can perform a powerful last shot to attempt to draw the ga\me.
+
+POWERUPS:
+SHOT+: upgrades shot
+BURST: Shoots a rapid fire 3 round burst (maybe also slows down player speed while shooting)
+REFLECT+:Reflect stays for a while longer, and the reflected shot gets upgraded or is faster
+INSTASHOT: slows player speed and counts down from 3, then fires a instant laser
+SPEED+
