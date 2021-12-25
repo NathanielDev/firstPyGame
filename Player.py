@@ -4,7 +4,7 @@ from Bullet import Bullet
 from BulletHandler import BulletHandler
 
 class Player():
-    def __init__(self,x,y,width,height,pBulletW,pBulletH,pBulletV,pBulletC,pBulletM,spritePath,isP1):
+    def __init__(self,x,y,width,height,pBulletW,pBulletH,pBulletV,pBulletC,pBulletM,spritePath,isP1,isLocal):
         self.x = x
         self.y = y
         self.width = width
@@ -22,6 +22,8 @@ class Player():
         self.pBulletC = pBulletC
         self.pBulletM = pBulletM
         self.isP1 = isP1
+        #self.pBulletID = pBulletID
+        self.isLocal = isLocal
 
     # def update_rect(self):
     #     self.rect.x = self.x
@@ -37,23 +39,54 @@ class Player():
         Bullet(self.rect.x+20,self.rect.y+20,self.pBulletW,self.pBulletH,self.pBulletV,self.pBulletC,self.pBulletM,handler=self.pbList) #braindead moment
     def handle_movement(self):
         keys = pygame.key.get_pressed()
+        if self.isLocal:
+            if self.isP1:    
+                if keys[pygame.K_w] and self.rect.y - self.vel > 700//2 + 30: #WIDTH//2 + BORDER_WIDTH
+                    self.rect.y -= self.vel
+                
+                if keys[pygame.K_s] and self.rect.y + self.vel < 700 - self.height:
+                    self.rect.y += self.vel
+                
+                if keys[pygame.K_a] and self.rect.x - self.vel > 0:
+                    self.rect.x -= self.vel
+                
+                if keys[pygame.K_d] and self.rect.x + self.vel < 1400 - self.width:
+                
+                    self.rect.x += self.vel
+                if keys[pygame.K_f] and len(self.pbList) < 8:
+                    self.shoot()
+            else:
+                if keys[pygame.K_UP] and self.rect.y - self.vel > 0: #WIDTH//2 + BORDER_WIDTH
+                    self.rect.y -= self.vel
+                
+                if keys[pygame.K_DOWN] and self.rect.y + self.vel < 700//2 - 30:
+                    self.rect.y += self.vel
+                
+                if keys[pygame.K_LEFT] and self.rect.x - self.vel > 0:
+                    self.rect.x -= self.vel
+                
+                if keys[pygame.K_RIGHT] and self.rect.x + self.vel < 1400 - self.width:
+                
+                    self.rect.x += self.vel
+                if keys[pygame.K_END] and len(self.pbList) < 8:
+                    self.shoot()
+        else:
+            if self.isP1:
+                if keys[pygame.K_w] and self.rect.y - self.vel > 700//2 + 30: #WIDTH//2 + BORDER_WIDTH
+                        self.rect.y -= self.vel
+                    
+                if keys[pygame.K_s] and self.rect.y + self.vel < 700 - self.height:
+                        self.rect.y += self.vel
+                    
+                if keys[pygame.K_a] and self.rect.x - self.vel > 0:
+                        self.rect.x -= self.vel
+                    
+                if keys[pygame.K_d] and self.rect.x + self.vel < 1400 - self.width:
+                    
+                        self.rect.x += self.vel
+                if keys[pygame.K_j]:
+                        self.shoot()
 
-        if self.isP1:    
-            if keys[pygame.K_w] and self.rect.y - self.vel > 700//2 + 30: #WIDTH//2 + BORDER_WIDTH
-                self.rect.y -= self.vel
-            
-            if keys[pygame.K_s] and self.rect.y + self.vel < 700 - self.height:
-                self.rect.y += self.vel
-            
-            if keys[pygame.K_a] and self.rect.x - self.vel > 0:
-                self.rect.x -= self.vel
-            
-            if keys[pygame.K_d] and self.rect.x + self.vel < 1400 - self.width:
-            
-                self.rect.x += self.vel
-        if keys[pygame.K_j]:
-            self.shoot()
-            print("hey")
 
         
 

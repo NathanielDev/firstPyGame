@@ -1,8 +1,8 @@
 import pygame
-from Bullet import Bullet
-from BulletHandler import BulletHandler
 from Player import Player
 import os
+
+from network import Network
 pygame.font.init()
 
 WIDTH, HEIGHT = 1400, 700
@@ -84,11 +84,15 @@ def on_win(text):
     pygame.time.delay(3000)
 
 def main():
+    n = Network()
+    p1 = n.getP()
+    
     doonce = True
     clock = pygame.time.Clock()
     run = True
     border = pygame.Rect(BORDER_X,BORDER_Y,BORDER_WIDTH,BORDER_HEIGHT)
     while run:
+        p2 = n.send(p1)
 
         if DEBUG:
             print(p1.pbList.bulletList)

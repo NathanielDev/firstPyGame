@@ -26,4 +26,6 @@ class BulletHandler():
             bullet.rect.y = bullet.y
             
             pygame.draw.rect(WIN,bullet.color,bullet.rect)
+    def __len__(self):
+        return len(self.bulletList)
                 
