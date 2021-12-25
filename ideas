@@ -8,3 +8,5 @@ BURST: Shoots a rapid fire 3 round burst (maybe also slows down player speed whi
 REFLECT+:Reflect stays for a while longer, and the reflected shot gets upgraded or is faster
 INSTASHOT: slows player speed and counts down from 3, then fires a instant laser
 SPEED+
+TODO:
+Maybe make a "PlayerTicket" class to pack all things from the player variable that need to be transitted, and then reassemble that on the client

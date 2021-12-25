@@ -1,5 +1,5 @@
 import pygame
-from Player import Player
+from Player_MP import Player
 import os
 
 from network import Network
@@ -57,16 +57,27 @@ FPS = 60
 
 #bhandler1 = BulletHandler()
 #bullet1 = Bullet(500,100,10,10,5,YELLOW,"+y",bhandler1)
-#bhandler1.append(bullet) no longer needed since bullets self-append now
-p1 = Player(P1_INIIAL_X,P1_INITIAL_Y,50,50,BULLET_WIDTH,BULLET_HEIGTH,BULLET_VEL,BULLET_COLOR_P1,BULLET_MODE_P1,os.path.join("Assets","spaceship2.2.png"),True,IS_LOCAL)
-p2 = Player(P2_INIIAL_X,P2_INITIAL_Y,50,50,BULLET_WIDTH,BULLET_HEIGTH,BULLET_VEL,BULLET_COLOR_P2,BULLET_MODE_P2,os.path.join("Assets","spaceship.png"),False,IS_LOCAL)
+# #bhandler1.append(bullet) no longer needed since bullets self-append now
+# p1 = Player(P1_INIIAL_X,P1_INITIAL_Y,50,50,BULLET_WIDTH,BULLET_HEIGTH,BULLET_VEL,BULLET_COLOR_P1,BULLET_MODE_P1,0,True,IS_LOCAL)
+# p2 = Player(P2_INIIAL_X,P2_INITIAL_Y,50,50,BULLET_WIDTH,BULLET_HEIGTH,BULLET_VEL,BULLET_COLOR_P2,BULLET_MODE_P2,1,False,IS_LOCAL)
 
 
-def draw_window(border):
+def draw(player,WIN, debug):
+    if player.spriteID == 0:
+        sprite = pygame.transform.scale(pygame.image.load(os.path.join("Assets","spaceship2.2.png")),(player.width,player.height))
+    else:
+        sprite = pygame.transform.rotate(pygame.transform.scale(pygame.image.load(os.path.join("Assets", "spaceship.png")),
+                                        (player.width, player.height)),180)
+    WIN.blit(sprite, (player.rect.x, player.rect.y))
+    if debug:  # draw only hitboxes
+        pygame.draw.rect(WIN, (255, 0, 0), player.rect)
+
+
+def draw_window(border,p1,p2):
     WIN.blit(BG,(0,0))
     pygame.draw.rect(WIN,WHITE,border)
-    p1.draw(WIN,DEBUG)
-    p2.draw(WIN,DEBUG)
+    draw(p1,WIN,DEBUG)
+    draw(p2,WIN,DEBUG)
     
     #bhandler1.handleBullets()
     #bhandler1.draw_all(WIN)
@@ -85,13 +96,14 @@ def on_win(text):
 
 def main():
     n = Network()
-    p1 = n.getP()
+
     
     doonce = True
     clock = pygame.time.Clock()
     run = True
     border = pygame.Rect(BORDER_X,BORDER_Y,BORDER_WIDTH,BORDER_HEIGHT)
     while run:
+        p1 = n.getP()
         p2 = n.send(p1)
 
         if DEBUG:
@@ -125,7 +137,7 @@ def main():
         p1.handle_movement()
         p2.handle_movement()
         
-        draw_window(border)
+        draw_window(border,p1,p2)
 
 
         

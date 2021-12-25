@@ -2,7 +2,7 @@ import socket
 from _thread import *
 import os
 import sys
-from Player import Player
+from Player_MP import Player
 import pickle
 WIDTH, HEIGHT = 1400, 700
 # WIN = pygame.display.set_mode((WIDTH,HEIGHT))
@@ -68,7 +68,7 @@ s.listen(2)
 print("Server Started.")
 
 
-players = [Player(P1_INIIAL_X,P1_INITIAL_Y,50,50,BULLET_WIDTH,BULLET_HEIGTH,BULLET_VEL,BULLET_COLOR_P1,BULLET_MODE_P1,os.path.join("Assets","spaceship2.2.png"),True,IS_LOCAL),Player(P2_INIIAL_X,P2_INITIAL_Y,50,50,BULLET_WIDTH,BULLET_HEIGTH,BULLET_VEL,BULLET_COLOR_P2,BULLET_MODE_P2,os.path.join("Assets","spaceship.png"),False,IS_LOCAL)]
+players = [Player(P1_INIIAL_X,P1_INITIAL_Y,50,50,BULLET_WIDTH,BULLET_HEIGTH,BULLET_VEL,BULLET_COLOR_P1,BULLET_MODE_P1,0,True,IS_LOCAL),Player(P2_INIIAL_X,P2_INITIAL_Y,50,50,BULLET_WIDTH,BULLET_HEIGTH,BULLET_VEL,BULLET_COLOR_P2,BULLET_MODE_P2,1,False,IS_LOCAL)]
 
 
 
@@ -77,7 +77,7 @@ def threaded_client(conn,player):
     reply = ""
     while True:
         try:
-            data = pickle.loads(conn.recv(2048))
+            data = pickle.loads(conn.recv(2048*2))
             players[player] = data
 
             if not data:
