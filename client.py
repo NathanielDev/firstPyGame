@@ -93,7 +93,7 @@ def draw_window(border, p1, p2):
 def on_win(text):
     win_text = FONT_ON_WIN.render(text, 1, RED)
     WIN.blit(win_text, (WIDTH//2 - win_text.get_width() /
-             2, HEIGHT//2 - win_text.get_height()/2))
+                        2, HEIGHT//2 - win_text.get_height()/2))
     pygame.display.update()
     pygame.time.delay(3000)
 

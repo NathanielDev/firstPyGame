@@ -40,20 +40,34 @@ class Player():
     def handle_movement(self):
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_w] and self.rect.y - self.vel > 700 // 2 + 30:  # WIDTH//2 + BORDER_WIDTH
-            self.rect.y -= self.vel
+        if self.isP1:
+            if keys[pygame.K_w] and self.rect.y - self.vel > 700 // 2 + 30:  # WIDTH//2 + BORDER_WIDTH
+                self.rect.y -= self.vel
 
-        if keys[pygame.K_s] and self.rect.y + self.vel < 700 - self.height:
-            self.rect.y += self.vel
+            if keys[pygame.K_s] and self.rect.y + self.vel < 700 - self.height:
+                self.rect.y += self.vel
 
-        if keys[pygame.K_a] and self.rect.x - self.vel > 0:
-            self.rect.x -= self.vel
+            if keys[pygame.K_a] and self.rect.x - self.vel > 0:
+                self.rect.x -= self.vel
 
-        if keys[pygame.K_d] and self.rect.x + self.vel < 1400 - self.width:
-            self.rect.x += self.vel
-        if keys[pygame.K_j] and len(self.pbList.bulletList) < 9:
-            self.shoot()
+            if keys[pygame.K_d] and self.rect.x + self.vel < 1400 - self.width:
+                self.rect.x += self.vel
+            if keys[pygame.K_j] and len(self.pbList) < 8:
+                self.shoot()
+        else:
+            if keys[pygame.K_w] and self.rect.y - self.vel > 0:  # WIDTH//2 + BORDER_WIDTH
+                self.rect.y -= self.vel
 
+            if keys[pygame.K_s] and self.rect.y + self.vel < 700 // 2 - 30:
+                self.rect.y += self.vel
+
+            if keys[pygame.K_a] and self.rect.x - self.vel > 0:
+                self.rect.x -= self.vel
+
+            if keys[pygame.K_d] and self.rect.x + self.vel < 1400 - self.width:
+                self.rect.x += self.vel
+            if keys[pygame.K_j] and len(self.pbList) < 8:
+                self.shoot()
 
 
 

@@ -50,7 +50,7 @@ BG = pygame.transform.scale(pygame.image.load(
 #SPACESHIP = pygame.transform.scale(pygame.image.load("Assets/spaceship.png"),(50,50))
 
 # SETTINGS:
-IS_LOCAL = False
+IS_LOCAL = True
 DEBUG = False
 
 FPS = 60
